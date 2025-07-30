@@ -79,7 +79,7 @@ export const Stotras = () => {
   const [activeCategory, setActiveCategory] = useState('shivji');
 
   return (
-    <div className="min-h-screen pt-24 py-20 px-6">
+    <div className="min-h-screen pt-32 py-20 px-6">
       {/* Header */}
       <div className="text-center mb-16">
         <h1 className="font-comic text-5xl md:text-6xl text-pop-orange mb-4">
