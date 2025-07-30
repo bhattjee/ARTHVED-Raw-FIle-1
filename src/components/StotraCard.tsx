@@ -1,19 +1,24 @@
 import { Button } from "@/components/ui/button";
-import { Play, Pause, Download, Volume2, VolumeX } from "lucide-react";
+import { Play, Pause, Download, Volume2, VolumeX, ChevronDown, ChevronUp } from "lucide-react";
 import { useState, useRef } from "react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface StotraCardProps {
   title: string;
   sanskritText: string;
-  meaning: string;
+  englishMeaning: string;
+  hindiMeaning?: string;
   audioUrl?: string;
   downloadUrl?: string;
+  spotifyUrl?: string;
 }
 
-export const StotraCard = ({ title, sanskritText, meaning, audioUrl, downloadUrl }: StotraCardProps) => {
+export const StotraCard = ({ title, sanskritText, englishMeaning, hindiMeaning, audioUrl, downloadUrl, spotifyUrl }: StotraCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.7);
   const [isMuted, setIsMuted] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [language, setLanguage] = useState<'english' | 'hindi'>('english');
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const togglePlay = () => {
@@ -42,8 +47,14 @@ export const StotraCard = ({ title, sanskritText, meaning, audioUrl, downloadUrl
     }
   };
 
+  const handleSpotifyPlay = () => {
+    if (spotifyUrl) {
+      window.open(spotifyUrl, '_blank');
+    }
+  };
+
   return (
-    <div className="bg-card border-4 border-pop-orange rounded-2xl p-8 shadow-comic pop-hover relative overflow-hidden">
+    <div className="bg-card border-4 border-pop-orange rounded-2xl shadow-comic pop-hover relative overflow-hidden">
       {/* Decorative halftone pattern */}
       <div className="absolute top-0 right-0 w-32 h-32 halftone-md opacity-20"></div>
       
@@ -52,83 +63,129 @@ export const StotraCard = ({ title, sanskritText, meaning, audioUrl, downloadUrl
         BAM!
       </div>
 
-      {/* Title */}
-      <h2 className="font-comic text-3xl text-pop-orange mb-6 relative z-10">
-        {title.toUpperCase()}
-      </h2>
-
-      {/* Sanskrit text */}
-      <div className="font-sanskrit text-xl text-foreground mb-6 leading-relaxed bg-background/20 p-4 rounded-lg border-2 border-pop-orange/30">
-        {sanskritText}
-      </div>
-
-      {/* Meaning in speech bubble */}
-      <div className="speech-bubble text-base mb-6 relative z-10">
-        <strong>Meaning:</strong> {meaning}
-      </div>
-
-      {/* Audio player section */}
-      {audioUrl && (
-        <div className="bg-deep-blue/80 border-3 border-pop-yellow rounded-xl p-6 mb-6">
-          <audio
-            ref={audioRef}
-            src={audioUrl}
-            onEnded={() => setIsPlaying(false)}
-            onLoadedMetadata={() => {
-              if (audioRef.current) {
-                audioRef.current.volume = volume;
-              }
-            }}
-          />
-          
-          {/* Audio controls */}
-          <div className="flex items-center gap-4 mb-4">
-            <Button 
-              variant="comic" 
-              size="icon" 
-              onClick={togglePlay}
-              className="flex-shrink-0"
-            >
-              {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
+      {/* Header with title and sticky action buttons */}
+      <div className="sticky top-0 z-20 bg-card border-b-2 border-pop-orange/30 p-6 backdrop-blur-sm">
+        <h2 className="font-comic text-2xl md:text-3xl text-pop-orange mb-4 relative z-10">
+          {title.toUpperCase()}
+        </h2>
+        
+        {/* Sticky Action buttons */}
+        <div className="flex flex-wrap gap-3 justify-center">
+          <Button variant="hero" size="comic" onClick={togglePlay}>
+            <Play className="w-5 h-5" />
+            PLAY NOW
+          </Button>
+          {spotifyUrl && (
+            <Button variant="comic" size="comic" onClick={handleSpotifyPlay}>
+              <span className="text-green-500 mr-2">♪</span>
+              SPOTIFY
             </Button>
-            
+          )}
+          {downloadUrl && (
+            <Button variant="download" size="comic">
+              <Download className="w-5 h-5" />
+              DOWNLOAD
+            </Button>
+          )}
+        </div>
+      </div>
+
+      {/* Content area */}
+      <div className="p-6 pt-0">
+        {/* Collapsible Sanskrit verses and translation */}
+        <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+          <CollapsibleTrigger asChild>
             <Button 
               variant="spiritual" 
-              size="icon" 
-              onClick={toggleMute}
-              className="flex-shrink-0"
+              className="w-full justify-between mb-4"
+              size="comic"
             >
-              {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+              <span>VIEW VERSES & MEANING</span>
+              {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
             </Button>
+          </CollapsibleTrigger>
+          
+          <CollapsibleContent className="space-y-6">
+            {/* Sanskrit text */}
+            <div className="font-sanskrit text-lg text-foreground leading-relaxed bg-background/20 p-6 rounded-lg border-2 border-pop-orange/30 max-h-64 overflow-y-auto">
+              {sanskritText}
+            </div>
+
+            {/* Translation section */}
+            <div className="space-y-4">
+              {/* Language toggle buttons */}
+              <div className="flex gap-2 justify-center">
+                <Button
+                  variant={language === 'english' ? 'comic' : 'spiritual'}
+                  size="sm"
+                  onClick={() => setLanguage('english')}
+                >
+                  English
+                </Button>
+                {hindiMeaning && (
+                  <Button
+                    variant={language === 'hindi' ? 'comic' : 'spiritual'}
+                    size="sm"
+                    onClick={() => setLanguage('hindi')}
+                  >
+                    हिंदी
+                  </Button>
+                )}
+              </div>
+
+              {/* Meaning in speech bubble */}
+              <div className="speech-bubble text-base relative z-10 max-h-48 overflow-y-auto">
+                <strong className="text-pop-orange">
+                  {language === 'english' ? 'Meaning:' : 'अर्थ:'}
+                </strong>
+                <p className="mt-2">
+                  {language === 'english' ? englishMeaning : hindiMeaning || englishMeaning}
+                </p>
+              </div>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+
+        {/* Audio player section */}
+        {audioUrl && (
+          <div className="bg-deep-blue/80 border-3 border-pop-yellow rounded-xl p-6 mt-6">
+            <audio
+              ref={audioRef}
+              src={audioUrl}
+              onEnded={() => setIsPlaying(false)}
+              onLoadedMetadata={() => {
+                if (audioRef.current) {
+                  audioRef.current.volume = volume;
+                }
+              }}
+            />
             
-            {/* Volume slider */}
-            <div className="flex items-center gap-2 flex-1">
-              <span className="font-body text-pop-yellow text-sm font-bold">VOL:</span>
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.1"
-                value={volume}
-                onChange={handleVolumeChange}
-                className="flex-1 h-2 bg-pop-orange rounded-lg appearance-none cursor-pointer slider-pop"
-              />
+            {/* Audio controls */}
+            <div className="flex items-center gap-4">
+              <Button 
+                variant="spiritual" 
+                size="icon" 
+                onClick={toggleMute}
+                className="flex-shrink-0"
+              >
+                {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+              </Button>
+              
+              {/* Volume slider */}
+              <div className="flex items-center gap-2 flex-1">
+                <span className="font-body text-pop-yellow text-sm font-bold">VOL:</span>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  value={volume}
+                  onChange={handleVolumeChange}
+                  className="flex-1 h-2 bg-pop-orange rounded-lg appearance-none cursor-pointer slider-pop"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      )}
-
-      {/* Action buttons */}
-      <div className="flex flex-wrap gap-4 justify-center">
-        <Button variant="comic" size="comic">
-          <Play className="w-5 h-5" />
-          PLAY
-        </Button>
-        {downloadUrl && (
-          <Button variant="download" size="comic">
-            <Download className="w-5 h-5" />
-            DOWNLOAD
-          </Button>
         )}
       </div>
     </div>
