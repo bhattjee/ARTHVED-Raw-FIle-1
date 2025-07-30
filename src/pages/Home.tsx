@@ -5,9 +5,9 @@ import heroImage from "@/assets/shiva-pop-art-hero.jpg";
 
 export const Home = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 halftone-lg opacity-10 animate-pulse"></div>
         <div className="absolute top-20 left-10 w-32 h-32 halftone-md opacity-20 animate-bounce" style={{ animationDelay: '2s' }}></div>
