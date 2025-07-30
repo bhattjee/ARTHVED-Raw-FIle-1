@@ -18,12 +18,19 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Pop Art Variants
+        comic: "bg-pop-orange text-comic-black border-4 border-comic-black font-comic text-lg shadow-comic hover:shadow-pop hover:scale-105 hover:-rotate-1 transition-all duration-200",
+        hero: "bg-gradient-pop text-comic-black border-4 border-comic-black font-comic text-2xl shadow-pop hover:shadow-[8px_8px_0px_hsl(var(--comic-black))] hover:scale-110 hover:rotate-2 transition-all duration-300",
+        spiritual: "bg-pop-yellow text-comic-black border-3 border-comic-black font-body font-bold shadow-comic hover:bg-secondary hover:shadow-pop transition-all duration-200",
+        download: "bg-comic-white text-deep-blue border-4 border-deep-blue font-comic text-lg shadow-comic hover:bg-pop-yellow hover:shadow-pop hover:scale-105 transition-all duration-200"
       },
       size: {
         default: "h-10 px-4 py-2",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
+        comic: "h-14 px-6 py-3",
+        hero: "h-20 px-12 py-4"
       },
     },
     defaultVariants: {

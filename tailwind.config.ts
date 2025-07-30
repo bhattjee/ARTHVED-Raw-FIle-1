@@ -61,7 +61,30 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Pop Art Colors
+				'pop-orange': 'hsl(var(--pop-orange))',
+				'deep-blue': 'hsl(var(--deep-blue))',
+				'pop-yellow': 'hsl(var(--pop-yellow))',
+				'comic-black': 'hsl(var(--comic-black))',
+				'comic-white': 'hsl(var(--comic-white))'
+			},
+			fontFamily: {
+				'comic': ['Bangers', 'cursive'],
+				'body': ['Poppins', 'sans-serif'],
+				'sanskrit': ['Noto Sans Devanagari', 'sans-serif']
+			},
+			backgroundImage: {
+				'gradient-pop': 'var(--gradient-pop)',
+				'gradient-cosmic': 'var(--gradient-cosmic)'
+			},
+			boxShadow: {
+				'comic': 'var(--shadow-comic)',
+				'pop': 'var(--shadow-pop)'
+			},
+			animation: {
+				'bounce-slow': 'bounce 2s infinite',
+				'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

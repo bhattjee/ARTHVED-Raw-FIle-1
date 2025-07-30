@@ -8,35 +8,54 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Pop Art Color Palette */
+    --background: 237 85% 12%;  /* Deep Blue #1A237E */
+    --foreground: 0 0% 100%;    /* White */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 237 85% 12%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 237 85% 12%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 18 100% 60%;      /* Pop Orange #FF6B35 */
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 51 100% 50%;    /* Yellow #FFD700 */
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 237 85% 20%;
+    --muted-foreground: 0 0% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 18 100% 60%;       /* Pop Orange */
+    --accent-foreground: 0 0% 0%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 18 100% 60%;       /* Orange borders */
+    --input: 237 85% 20%;
+    --ring: 18 100% 60%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Pop Art specific colors */
+    --pop-orange: 18 100% 60%;   /* #FF6B35 */
+    --deep-blue: 237 85% 12%;    /* #1A237E */
+    --pop-yellow: 51 100% 50%;   /* #FFD700 */
+    --comic-black: 0 0% 0%;      /* Pure Black */
+    --comic-white: 0 0% 100%;    /* Pure White */
+
+    /* Pop Art gradients and effects */
+    --gradient-pop: linear-gradient(135deg, hsl(var(--pop-orange)), hsl(var(--pop-yellow)));
+    --gradient-cosmic: linear-gradient(180deg, hsl(var(--deep-blue)), hsl(237 85% 8%));
+    
+    /* Comic shadows */
+    --shadow-comic: 4px 4px 0px hsl(var(--comic-black));
+    --shadow-pop: 6px 6px 0px hsl(var(--comic-black));
+    
+    /* Transitions */
+    --transition-pop: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +120,116 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    /* Halftone dot pattern background */
+    background-image: radial-gradient(circle, hsl(var(--pop-orange)) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Comic Book Typography */
+  .font-comic {
+    font-family: 'Bangers', cursive;
+    text-shadow: var(--shadow-comic);
+    letter-spacing: 0.05em;
+  }
+
+  .font-body {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .font-sanskrit {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+
+  /* Pop Art Effects */
+  .comic-shadow {
+    box-shadow: var(--shadow-comic);
+  }
+
+  .pop-shadow {
+    box-shadow: var(--shadow-pop);
+  }
+
+  .pop-transform {
+    transition: var(--transition-pop);
+  }
+
+  .pop-hover:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: var(--shadow-pop);
+  }
+
+  /* Speech Bubble */
+  .speech-bubble {
+    position: relative;
+    background: hsl(var(--pop-orange));
+    color: hsl(var(--comic-black));
+    border: 3px solid hsl(var(--comic-black));
+    border-radius: 20px;
+    padding: 1rem;
+  }
+
+  .speech-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 20px;
+    border-width: 12px 12px 0;
+    border-style: solid;
+    border-color: hsl(var(--pop-orange)) transparent;
+  }
+
+  .speech-bubble::before {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 17px;
+    border-width: 15px 15px 0;
+    border-style: solid;
+    border-color: hsl(var(--comic-black)) transparent;
+  }
+
+  /* Halftone Patterns */
+  .halftone-sm {
+    background-image: radial-gradient(circle, hsl(var(--pop-orange)) 0.5px, transparent 0.5px);
+    background-size: 10px 10px;
+  }
+
+  .halftone-md {
+    background-image: radial-gradient(circle, hsl(var(--pop-orange)) 1px, transparent 1px);
+    background-size: 15px 15px;
+  }
+
+  .halftone-lg {
+    background-image: radial-gradient(circle, hsl(var(--pop-orange)) 2px, transparent 2px);
+    background-size: 25px 25px;
+  }
+
+  /* Custom Audio Slider */
+  .slider-pop {
+    background: hsl(var(--pop-orange));
+    outline: none;
+    border-radius: 8px;
+    border: 2px solid hsl(var(--comic-black));
+  }
+
+  .slider-pop::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: hsl(var(--pop-yellow));
+    border: 2px solid hsl(var(--comic-black));
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px hsl(var(--comic-black));
+  }
+
+  .slider-pop::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: hsl(var(--pop-yellow));
+    border: 2px solid hsl(var(--comic-black));
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px hsl(var(--comic-black));
   }
 }
