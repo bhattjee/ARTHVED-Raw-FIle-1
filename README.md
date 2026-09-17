@@ -1,73 +1,132 @@
-# Welcome to your Lovable project
+# ARTHVED - Pop Shiva Vibrations
 
-## Project info
+A modern spiritual web application that presents ancient Hindu stotras (sacred verses) through a vibrant Pop Art aesthetic. This project bridges traditional wisdom with contemporary design, making spiritual content accessible and visually engaging for the digital age.
 
-**URL**: https://lovable.dev/projects/a9e6868d-0784-4e97-8dd2-da8e75ec65cf
+## 🎨 Project Overview
 
-## How can I edit this code?
+ARTHVED is a devotional platform dedicated to showcasing sacred stotras for various Hindu deities including:
+- **Lord Shiva** (शिव जी) - Shiva Tandava Stotram, Mahamrityunjaya Mantra
+- **Mata Ji** (माता जी) - Durga Chalisa, Lalita Sahasranama
+- **Hanuman Ji** (हनुमान जी) - Hanuman Chalisa
+- **Lord Ganesha** (गणेश जी) - Ganesh Aarti
 
-There are several ways of editing your application.
+Each stotra is presented with:
+- Original Sanskrit text
+- English translation
+- Hindi translation (हिंदी अर्थ)
+- Audio playback support
+- Downloadable PDF versions
 
-**Use Lovable**
+## 🛠️ Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a9e6868d-0784-4e97-8dd2-da8e75ec65cf) and start prompting.
+- **Framework**: React 18.3.1 with TypeScript
+- **Build Tool**: Vite 5.4.1
+- **Styling**: Tailwind CSS 3.4.11
+- **UI Components**: shadcn/ui (Radix UI primitives)
+- **Routing**: React Router DOM 6.26.2
+- **State Management**: TanStack Query (React Query) 5.56.2
+- **Icons**: Lucide React 0.462.0
+- **Form Handling**: React Hook Form 7.53.0 with Zod validation
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📁 Project Structure
 
-**Use your preferred IDE**
+```
+pop-shiva-vibrations/
+├── src/
+│   ├── components/          # Reusable UI components
+│   │   ├── ui/              # shadcn/ui components
+│   │   ├── Header.tsx       # Navigation header
+│   │   ├── Footer.tsx       # Footer component
+│   │   ├── HeroSection.tsx  # Hero section
+│   │   ├── StotraCard.tsx   # Individual stotra display
+│   │   └── StotraGrid.tsx   # Grid layout for stotras
+│   ├── pages/               # Page components
+│   │   ├── Home.tsx         # Landing page
+│   │   ├── Stotras.tsx      # Stotras listing page
+│   │   ├── Festivals.tsx    # Festival information
+│   │   ├── About.tsx        # About page
+│   │   └── NotFound.tsx     # 404 page
+│   ├── assets/              # Static assets (images)
+│   ├── hooks/               # Custom React hooks
+│   ├── lib/                 # Utility functions
+│   ├── App.tsx              # Main app component
+│   └── main.tsx             # Entry point
+├── public/                  # Public static files
+└── package.json             # Dependencies
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🚀 Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Prerequisites
 
-Follow these steps:
+- Node.js (v18 or higher)
+- npm, yarn, or bun
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+### Installation
+
+```bash
+# Clone the repository
 git clone <YOUR_GIT_URL>
+cd pop-shiva-vibrations
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Install dependencies
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The application will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Available Scripts
 
-**Use GitHub Codespaces**
+- `npm run dev` - Start development server with hot reload
+- `npm run build` - Build for production
+- `npm run build:dev` - Build in development mode
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🎨 Design Features
 
-## What technologies are used for this project?
+- **Pop Art Aesthetic**: Vibrant colors, comic-style borders, halftone patterns
+- **Custom Typography**: Comic-style fonts for headings
+- **Responsive Design**: Mobile-first approach with hamburger menu
+- **Smooth Animations**: CSS animations for interactive elements
+- **Dark Theme**: Deep blue background with orange and yellow accents
 
-This project is built with:
+## 📄 Pages
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. **Home** (`/`) - Hero section with call-to-action and feature highlights
+2. **Stotras** (`/stotras`) - Browse stotras by deity category
+3. **Festivals** (`/festivals`) - Hindu festival calendar and information
+4. **About** (`/about`) - Mission and project information
 
-## How can I deploy this project?
+## 🔒 Security & Sensitive Data
 
-Simply open [Lovable](https://lovable.dev/projects/a9e6868d-0784-4e97-8dd2-da8e75ec65cf) and click on Share -> Publish.
+**Security Audit Results**: ✅ CLEAN
 
-## Can I connect a custom domain to my Lovable project?
+- No API keys or secrets found in source code
+- No hardcoded credentials
+- No environment configuration files (.env) present
+- No authentication tokens or private keys
+- No database connection strings
+- Only placeholder URLs detected (e.g., Spotify example URL)
 
-Yes, you can!
+The application is a static frontend with no backend dependencies or sensitive data exposure.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🌐 Deployment
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project can be deployed to any static hosting service:
+
+- **Vercel**: `vercel deploy`
+- **Netlify**: Connect repository and deploy
+- **GitHub Pages**: Configure in repository settings
+- **Lovable**: Use the integrated deployment feature
+
+## 📝 License
+
+This project is private and proprietary.
+
+## 🤝 Contributing
+
+This is a personal project. For contributions or questions, please contact the repository owner.
